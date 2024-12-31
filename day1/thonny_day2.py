@@ -1,5 +1,0 @@
-bill=float(input("Enter the bill amount: "))
-to_tip=float(input("Enter the tip percentage: "))
-people=int(input("Enter the number of people: "))
-split_amt=round((bill*(1+to_tip/100))/people, 2)
-print(f"Each person should pay: ${split_amt}")
