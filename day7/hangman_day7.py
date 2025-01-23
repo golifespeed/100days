@@ -1,56 +1,11 @@
 import random
-stages = ['''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========''']
-word_list=["aardvark", "baboon", "camel" ,"elephant", "tiger", "giraffe", "crocodile"]
-chosen_word=random.choice(word_list)
+import hangman_art
+import hangman_words
+
+print(hangman_art.welcome)
+print(hangman_art.logo)
+
+chosen_word=random.choice(hangman_words.word_list)
 
 print(chosen_word)
 
@@ -69,27 +24,30 @@ error_count=0
 
 while not game_over and error_count<6:
     guess=input("Guess a letter: ").lower()
+    if guess in correct_letters:
+        print(f"You've already guessed {guess}!")
     display=""
     for letter in chosen_word:
-        if letter==guess:
+        if guess==letter:
             display+=letter
             correct_letters.append(guess)
         elif letter in correct_letters:
             display+=letter
         else:
             display+="_"
-    print(display)
-    print(stages[error_count])
+
     if guess not in chosen_word:
         error_count+=1
-        print(display)
-        print(stages[error_count])
+        print(f"You guessed {guess}, that's not in the word. You lose a life.")
+        print("**** "+str(6-error_count)+" lives left! ****")
+    
+    print(display)
+    print(hangman_art.stages[error_count])
 
     if "_" not in display:
         game_over=True
-        print("You Win!")
+        print("******************** YOU WIN! ********************")
 
 if error_count>=6:
-    print("You Lose!")
-        
-
+    print("******************** YOU LOSE! ********************")
+    print("The correct word is: " + chosen_word)
