@@ -1,4 +1,5 @@
-word_list=['ant', 
+word_list=['aardvark',
+'ant', 
 'baboon', 
 'badger', 
 'bat', 
